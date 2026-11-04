@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements – Sujata Gurav | Classical Vocalist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #1c0828, #3a104f);
+            min-height: 100vh;
+            color: white;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            line-height: 1.7;
+        }
+
+        .back-nav {
+            background: rgba(50, 16, 71, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,216,107,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-nav h2 {
+            color: #ffd86b;
+            font-size: 22px;
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+        }
+        .back-btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #7b2ca3;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: #ffd86b;
+            color: #321047;
+            transform: translateY(-3px);
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 40px 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .page-header h2 {
+            color: #d8c0e0;
+            font-size: 22px;
+            font-weight: normal;
+            margin-bottom: 8px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .page-header h1 {
+            color: #ffd86b;
+            font-family: 'Cinzel', serif;
+            font-size: 46px;
+            text-shadow: 0 0 20px rgba(255,216,107,0.3);
+        }
+        .gold-line { width: 80px; height: 2px; background: #ffd86b; margin: 20px auto; }
+
+        .main-heading {
+            color: white;
+            font-size: 28px;
+            text-align: center;
+            line-height: 1.4;
+            margin: 40px 0 20px;
+            font-family: 'Cinzel', serif;
+        }
+        .main-heading span { color: #ffd86b; font-style: italic; }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .photo-gallery img {
+            width: 30%;
+            min-width: 200px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid rgba(255,216,107,0.4);
+            transition: 0.4s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.04);
+            border-color: #ffd86b;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255,216,107,0.2);
+        }
+
+        .description-block {
+            background: rgba(36, 18, 46, 0.6);
+            border: 1px solid rgba(255,216,107,0.2);
+            border-radius: 16px;
+            padding: 30px 35px;
+            margin-bottom: 30px;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #e0d0e8;
+        }
+
+        h4 {
+            color: #ffd86b;
+            font-size: 22px;
+            margin: 30px 0 15px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .performance-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .performance-list li {
+            background: rgba(36,18,46,0.5);
+            border: 1px solid rgba(255,216,107,0.2);
+            border-radius: 10px;
+            padding: 12px 18px;
+            color: #e0d0e8;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .performance-list li::before { content: '⭐ '; }
+        .performance-list li:hover {
+            border-color: rgba(255,216,107,0.5);
+            background: rgba(93,38,117,0.2);
+            transform: translateX(4px);
+        }
+
+        .cta-section { text-align: center; margin-top: 50px; }
+        button {
+            padding: 12px 30px; margin: 8px;
+            border: none; border-radius: 25px;
+            background: white; color: #7b2ca3;
+            font-size: 16px; font-weight: bold;
+            cursor: pointer; transition: .3s;
+        }
+        button:hover {
+            background: #ffd86b; color: #321047;
+            transform: translateY(-4px);
+        }
+
+        @media (max-width: 768px) {
+            .back-nav { padding: 12px 20px; }
+            .page-wrapper { padding: 30px 20px 60px; }
+            .page-header h1 { font-size: 30px; }
+            .photo-gallery img { width: 100%; height: 200px; }
+            .description-block { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="back-nav">
+        <h2>🎙️ Sujata Vocalist</h2>
+        <a href="/" class="back-btn">← Back to Home</a>
+    </div>
+
+    <div class="page-wrapper">
+
+        <div class="page-header">
+            <h2>Celebrating Excellence: Outstanding Achievements of</h2>
+            <h1>SUJATA GURAV</h1>
+            <div class="gold-line"></div>
+        </div>
+
+        <div class="photo-gallery">
+            <img src="/static/gal1.jpeg" alt="Award 1">
+            <img src="/static/gal2.jpeg" alt="Award 2">
+            <img src="/static/gal13.jpeg" alt="Award 3">
+        </div>
+
+        <h2 class="main-heading">
+            Milestones of Excellence:
+            <span>Celebrating the Journey of</span>
+            SUJATA GURAV
+        </h2>
+
+        <div class="description-block">
+            <p>
+                Discover the extensive list of awards and recognitions that Vidushi Sujata Gurav Kammar
+                has received at both state and national levels, each serving as a testament to her exceptional
+                contributions to the world of Hindustani classical music. Her illustrious career is marked by
+                numerous accolades that reflect not only her extraordinary talent, but also her profound impact
+                on the music world, affirming her status as a celebrated artist whose music continues to inspire
+                and enchant audiences across India and beyond.
+            </p>
+        </div>
+
+        <h4>Major Performance Venues</h4>
+        <p style="color:#c8b9ce; margin-bottom:16px; font-size:17px;">She has performed at several reputed music festivals and cultural platforms across India:</p>
+
+        <ul class="performance-list">
+            <li>Hari Vallabh Samaroh, Jalandhar</li>
+            <li>Tansen Sangeet Samaroh, Gwalior</li>
+            <li>Naadam, Kolkata</li>
+            <li>Delhi Karnataka Sangha</li>
+            <li>Bharatiya Vidya Bhavan, Pune</li>
+            <li>Ritu Basanth, Udaipur</li>
+            <li>Ramanavami Music Festival, Mysuru</li>
+            <li>Sangeetotsava, Dharwad and Hubballi</li>
+        </ul>
+
+        <h4>Awards &amp; Honours</h4>
+        <ul class="performance-list">
+            <li>Manik Varma Award – Pune Gayan Samaj</li>
+            <li>Sangeet Vikas Ratna</li>
+            <li>Swara Saraswati Title</li>
+            <li>Vocational Excellence Award – Rotary Club, Dharwad</li>
+            <li>Tappa-Thumri Award – South Central Zone Cultural Centre, Nagpur</li>
+            <li>Dashakada Sadhakaru honour</li>
+            <li>Naada Habba Outstanding Artist Award</li>
+            <li>Avva Award for contribution to music</li>
+        </ul>
+
+        <div class="cta-section">
+            <button onclick="window.location.href='/'">🏠 Back to Home</button>
+            <button onclick="window.location.href='/#Booking'">📅 Book Sujata</button>
+            <button onclick="window.location.href='/#contact'">✉️ Contact</button>
+        </div>
+
+    </div>
+
+</body>
+</html>

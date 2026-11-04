@@ -1,0 +1,903 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sujata Gurav | Classical Vocalist | Official Portfolio</title>
+
+    <link href="/static/style.css" rel="stylesheet"/>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+    <!-- ===================== INTRO ANIMATION ===================== -->
+    <div id="introAnimation">
+        <!-- 3D Floating elements -->
+        <span class="intro-float">♫</span>
+        <span class="intro-float">🎙️</span>
+        <span class="intro-float">♪</span>
+        <span class="intro-float">🎵</span>
+        <span class="intro-float">🎤</span>
+
+        <div class="intro-content">
+            <div class="circle"></div>
+            <img class="intro-logo" src="/static/logo.jpeg" alt="Sujata Gurav"/>
+            <h1>SUJATA GURAV</h1>
+            <span>VOCAL SINGER</span>
+        </div>
+    </div>
+
+    <!-- Skip Intro Button -->
+    <button id="skipIntroBtn" onclick="skipIntro()">✕ Skip Intro</button>
+
+    <!-- Suppress back-nav re-triggering intro -->
+    <script>
+    (function() {
+        // Mark that we've already seen the intro this session
+        if (sessionStorage.getItem('introSeen')) {
+            var intro = document.getElementById('introAnimation');
+            var skipBtn = document.getElementById('skipIntroBtn');
+            if (intro) { intro.style.opacity = '0'; intro.style.visibility = 'hidden'; intro.style.pointerEvents = 'none'; }
+            if (skipBtn) skipBtn.style.display = 'none';
+        } else {
+            sessionStorage.setItem('introSeen', '1');
+        }
+        // Push a history state so back goes to previous page, not re-runs intro
+        if (!history.state || !history.state.portfolio) {
+            history.replaceState({ portfolio: true }, '', window.location.href);
+        }
+    })();
+    </script>
+
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav>
+        <h2>🎙️ Sujata Vocalist</h2>
+
+        <div class="links">
+            <a href="#Home">Home</a>
+            <a href="#About">About</a>
+            <a href="#My-Albums-section">Albums</a>
+            <a href="#Gallery">Gallery</a>
+            <a href="#Achievements">Achievements</a>
+            <a href="#Events-section">Events</a>
+            <a href="#Booking">Booking</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="menu-box">
+            <button class="menu" onclick="showMenu()">☰</button>
+            <div class="menu-list" id="menuList">
+                <a href="#Home">Home</a>
+                <a href="#About">About</a>
+                <a href="#My-Albums-section">Albums</a>
+                <a href="#Gallery">Gallery</a>
+                <a href="#Achievements">Achievements</a>
+                <a href="#Events-section">Events</a>
+                <a href="#Booking">Booking</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HOME ===================== -->
+    <style>
+    .Home {
+        height: 120vh;
+        background-image:
+            linear-gradient(90deg, rgba(45, 5, 70, .8),
+            rgba(90, 20, 120, .4)),
+            url("/static/image1.jpeg");
+        background-size: cover;
+        background-position: center;
+        position: sticky;
+        color: white;
+    }
+    </style>
+
+    <section class="Home" id="Home">
+        <div class="content">
+            <p>WELCOME TO MY WORLD OF MUSIC 🎵</p>
+            <div class="home-name-row">
+                <div class="home-logo-wrap">
+                    <div class="home-logo-ring"></div>
+                    <img class="home-logo-img" src="/static/logo.jpeg" alt="Sujata Gurav">
+                </div>
+                <h1 class="singer-name">Vidushi Sujata</h1>
+            </div>
+            <h2>Vocalist • Performer • Music Lover</h2>
+            <p>
+                Music is my passion and performing is my way
+                of expressing emotions. Listen, feel and connect
+                with my journey through every note.
+            </p>
+            <div>
+                <button onclick="window.location.href='#My-Albums-section'">▶ LISTEN NOW</button>
+                <button onclick="window.location.href='#Booking'">BOOK ME</button>
+                <button onclick="window.location.href='#contact'">CONTACT ME</button>
+            </div>
+        </div>
+
+        <!-- FLOATING MUSIC NOTES -->
+        <div class="music-note">♪</div>
+        <div class="music-note note2">♫</div>
+    </section>
+
+    <!-- ===================== STATS ===================== -->
+    <section class="stats-section">
+        <div class="stats-container" id="statsContainer">
+            <!-- Cards generated with JavaScript -->
+        </div>
+    </section>
+
+    <style>
+    .stats-section {
+        background:#39104f;
+        width: 100%;
+        padding: 50px 15px 26px;
+    }
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    .stat-card {
+        min-height: 144px;
+        padding: 24px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(145deg, rgba(39, 22, 43, 0.97), rgba(35, 20, 34, 0.97));
+        border: 1px solid rgba(180, 135, 77, 0.25);
+        border-radius: 17px;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255, 210, 100, 0.65);
+        box-shadow: 0 8px 28px rgba(255, 190, 70, 0.08);
+    }
+    .stat-number {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(36px, 4vw, 50px);
+        font-weight: 700;
+        line-height: 1.1;
+        color: #ffd65f;
+        margin-bottom: 12px;
+    }
+    .stat-label {
+        color: #c9bdcf;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.4;
+        letter-spacing: 0.15px;
+        text-transform: uppercase;
+    }
+    @media (max-width: 900px) {
+        .stats-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+        .stat-card { min-height: 135px; }
+    }
+    @media (max-width: 480px) {
+        .stats-section { padding: 12px; }
+        .stats-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .stat-card { min-height: 120px; padding: 18px 8px; border-radius: 13px; }
+        .stat-number { font-size: 34px; margin-bottom: 9px; }
+        .stat-label { font-size: 10px; }
+    }
+    </style>
+
+    <script>
+    const stats = [
+        { number: 50, suffix: "+", label: "Live Performances" },
+        { number: 10, suffix: "+", label: "Original & Classical Tracks" },
+        { number: 20, suffix: "+", label: "Cultural Stage Events" },
+        { number: 5,  suffix: "+", label: "Awards & Honors" }
+    ];
+    const container = document.getElementById("statsContainer");
+    stats.forEach((stat) => {
+        const card = document.createElement("div");
+        card.className = "stat-card";
+        const number = document.createElement("div");
+        number.className = "stat-number";
+        number.textContent = `${stat.number}${stat.suffix}`;
+        const label = document.createElement("div");
+        label.className = "stat-label";
+        label.textContent = stat.label;
+        card.append(number, label);
+        container.appendChild(card);
+    });
+    </script>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="About" id="About">
+        <div class="about-image">
+            <img src="/static/about.jpeg" alt="singer">
+        </div>
+        <div class="card">
+            <h2>Voice of Soul &amp; Elegance</h2>
+            <p>
+                I am a passionate singer who loves expressing emotions through music.
+                Singing is not just a talent for me; it is a way to connect with people
+                and share feelings through my voice.
+
+                I enjoy exploring different styles of music and
+                continuously work on improving my singing skills. My goal is to create meaningful music,
+                perform confidently, and inspire others through my passion and dedication.
+
+                Music is an important part of my life, and I believe that every song has a story to tell.
+            </p>
+
+            <button onclick="showMore()">Explore More</button>
+        </div>
+    </section>
+
+    <!-- ===================== ALBUMS / SOCIAL ===================== -->
+    <section class="My-Albums-section" id="My-Albums-section">
+        <div class="My-Albums-container">
+            <h2 class="My-Albums-title">My Albums &amp; Connect</h2>
+
+            <div class="My-Albums-grid">
+                <div class="My-Album-card">
+                    <h3>▶ Connect With My Music</h3>
+                    <p>
+                        Watch my songs, live performances and music videos.
+                        <br>
+                        <span>@ SujataGurav1</span>
+                    </p>
+                    <img src="/static/gal7.jpeg" alt="Music">
+                    <a href="https://youtube.com/@sujatagurav1?si=FETMl-X2EHreeZgD" target="_blank" rel="noopener">
+                        ▶ Watch on YouTube
+                    </a>
+                </div>
+
+                <div class="My-Album-card">
+                    <h3>🅾 My Social World</h3>
+                    <p>
+                        See my latest reels, photos and stage performances.
+                        <br>
+                        <span>@ sujata_gurav_kammar</span>
+                    </p>
+                    <img src="/static/gal8.jpeg" alt="Instagram">
+                    <a href="https://www.instagram.com/sujata_gurav_kammar?stkn=MTh2bmI5d2VkZ2Fxag==" target="_blank" rel="noopener">
+                        Follow on Instagram
+                    </a>
+                </div>
+
+                <div class="My-Album-card">
+                    <h3>ⓕ Follow My Melody</h3>
+                    <p>
+                        Follow me for latest music updates and events.
+                        <br>
+                        <span>@ Sujata Gurav Kammar</span>
+                    </p>
+                    <img src="/static/gal9.jpeg" alt="Facebook">
+                    <a href="https://www.facebook.com/share/18PR69473y/" target="_blank" rel="noopener">
+                        Follow on Facebook
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== WATCH MY PERFORMANCES — REEL STYLE ===== -->
+            <div class="reel-section">
+                <div class="reel-section-header">
+                    <span class="reel-eyebrow">▶ Watch Live</span>
+                    <h3>Performances &amp; Reels</h3>
+                    <p>Swipe through highlights — tap to watch on YouTube</p>
+                </div>
+
+                <div class="reel-track" id="reelTrack">
+
+                    <a class="reel-card" href="https://www.youtube.com/@sujatagurav1" target="_blank" rel="noopener">
+                        <div class="reel-thumb" style="background: linear-gradient(160deg,#4a1060 0%,#1a0828 100%);">
+                            <img src="/static/gal7.jpeg" alt="Classical Raga" loading="lazy">
+                            <div class="reel-play-btn"><span>▶</span></div>
+                            <div class="reel-duration">Live</div>
+                            <div class="reel-gradient-overlay"></div>
+                        </div>
+                        <div class="reel-info">
+                            <div class="reel-platform-badge yt-badge">▶ YouTube</div>
+                            <p class="reel-title">Classical Raga Recital</p>
+                            <p class="reel-sub">Hindustani Classical · Kirana Gharana</p>
+                            <div class="reel-meta"><span>🎵 Live Stage</span><span>🔥 Watch Now</span></div>
+                        </div>
+                    </a>
+
+                    <a class="reel-card" href="https://www.youtube.com/@sujatagurav1/videos" target="_blank" rel="noopener">
+                        <div class="reel-thumb" style="background: linear-gradient(160deg,#2d0a4e 0%,#0f0320 100%);">
+                            <img src="/static/gal10.jpeg" alt="Stage Concert" loading="lazy">
+                            <div class="reel-play-btn"><span>▶</span></div>
+                            <div class="reel-duration">Concert</div>
+                            <div class="reel-gradient-overlay"></div>
+                        </div>
+                        <div class="reel-info">
+                            <div class="reel-platform-badge yt-badge">▶ YouTube</div>
+                            <p class="reel-title">Live Stage Concert</p>
+                            <p class="reel-sub">Cultural Festival Performance</p>
+                            <div class="reel-meta"><span>🎤 Stage</span><span>🔥 Watch Now</span></div>
+                        </div>
+                    </a>
+
+                    <a class="reel-card" href="https://www.youtube.com/@sujatagurav1" target="_blank" rel="noopener">
+                        <div class="reel-thumb" style="background: linear-gradient(160deg,#3d0d58 0%,#1a0520 100%);">
+                            <img src="/static/gal8.jpeg" alt="Devotional" loading="lazy">
+                            <div class="reel-play-btn"><span>▶</span></div>
+                            <div class="reel-duration">Devotional</div>
+                            <div class="reel-gradient-overlay"></div>
+                        </div>
+                        <div class="reel-info">
+                            <div class="reel-platform-badge yt-badge">▶ YouTube</div>
+                            <p class="reel-title">Bhajan &amp; Abhang</p>
+                            <p class="reel-sub">Devotional Song Recital</p>
+                            <div class="reel-meta"><span>🙏 Spiritual</span><span>🔥 Watch Now</span></div>
+                        </div>
+                    </a>
+
+                    <a class="reel-card" href="https://www.youtube.com/@sujatagurav1" target="_blank" rel="noopener">
+                        <div class="reel-thumb" style="background: linear-gradient(160deg,#5a1070 0%,#200830 100%);">
+                            <img src="/static/gal12.jpeg" alt="Thumri" loading="lazy">
+                            <div class="reel-play-btn"><span>▶</span></div>
+                            <div class="reel-duration">Thumri</div>
+                            <div class="reel-gradient-overlay"></div>
+                        </div>
+                        <div class="reel-info">
+                            <div class="reel-platform-badge yt-badge">▶ YouTube</div>
+                            <p class="reel-title">Thumri &amp; Dadra</p>
+                            <p class="reel-sub">Semi-classical Vocal Recital</p>
+                            <div class="reel-meta"><span>🎼 Semi-Classical</span><span>🔥 Watch Now</span></div>
+                        </div>
+                    </a>
+
+                    <a class="reel-card reel-cta-card" href="https://www.youtube.com/@sujatagurav1" target="_blank" rel="noopener">
+                        <div class="reel-thumb reel-cta-thumb">
+                            <div class="reel-cta-inner">
+                                <div class="reel-yt-icon">▶</div>
+                                <p>View All</p>
+                                <span>@ SujataGurav1</span>
+                            </div>
+                        </div>
+                        <div class="reel-info">
+                            <p class="reel-title">Subscribe on YouTube</p>
+                            <p class="reel-sub">All performances &amp; recordings</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Reel scroll indicators -->
+                <div class="reel-nav">
+                    <button class="reel-nav-btn" onclick="scrollReel(-1)" aria-label="Previous">‹</button>
+                    <div class="reel-dots" id="reelDots"></div>
+                    <button class="reel-nav-btn" onclick="scrollReel(1)" aria-label="Next">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" onclick="closeVideo()">
+        <div class="video-modal-inner" onclick="event.stopPropagation()">
+            <span class="video-modal-close" onclick="closeVideo()">×</span>
+            <div class="video-modal-frame">
+                <iframe id="videoFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- reel scroll JS handled in script.js -->
+
+    <!-- ===================== GALLERY ===================== -->
+    <section class="Gallery-section" id="Gallery">
+        <h2>My Gallery</h2>
+        <p class="Gallery-subtitle">A collection of my musical memories</p>
+
+        <div class="Gallery">
+            <div class="photo"><img src="/static/gal10.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal12.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal5.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal6.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal4.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal3.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal9.jpeg" alt="Performance"></div>
+            <div class="photo"><img src="/static/gal11.jpeg" alt="Performance"></div>
+        </div>
+    </section>
+
+    <!-- ===================== ACHIEVEMENTS ===================== -->
+    <section class="Achievements" id="Achievements">
+        <div class="achievements-header">
+            <span class="ach-eyebrow">Recognised Excellence</span>
+            <h2>My Achievements</h2>
+            <p class="subtitle">A journey of dedication, classical mastery and cultural recognition</p>
+        </div>
+
+        <!-- Award Highlight Badges -->
+        <div class="ach-awards-row">
+            <div class="ach-award-badge">
+                <div class="ach-badge-icon">🏆</div>
+                <div class="ach-badge-text">
+                    <strong>Manik Varma Award</strong>
+                    <span>Pune Gayan Samaj</span>
+                </div>
+            </div>
+            <div class="ach-award-badge">
+                <div class="ach-badge-icon">🌟</div>
+                <div class="ach-badge-text">
+                    <strong>Swara Saraswati</strong>
+                    <span>Title of Honour</span>
+                </div>
+            </div>
+            <div class="ach-award-badge">
+                <div class="ach-badge-icon">🎖️</div>
+                <div class="ach-badge-text">
+                    <strong>Sangeet Vikas Ratna</strong>
+                    <span>Music Excellence</span>
+                </div>
+            </div>
+            <div class="ach-award-badge">
+                <div class="ach-badge-icon">🎵</div>
+                <div class="ach-badge-text">
+                    <strong>Naada Habba Award</strong>
+                    <span>Outstanding Artist</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Cards -->
+        <div class="Achievement-container">
+            <div class="Achievement-card">
+                <div class="ach-card-icon">🎤</div>
+                <div class="ach-card-num">50<span>+</span></div>
+                <h3>Live Performances</h3>
+                <p>Classical concerts, cultural festivals and devotional programmes across India — from Dharwad to Delhi, Kolkata to Pune.</p>
+                <div class="ach-card-bar"><div class="ach-card-fill" style="width:85%"></div></div>
+            </div>
+            <div class="Achievement-card">
+                <div class="ach-card-icon">🏅</div>
+                <div class="ach-card-num">8<span>+</span></div>
+                <h3>Awards &amp; Titles</h3>
+                <p>Honoured with prestigious state and national recognitions including the Avva Award, Rotary Excellence Award and Tappa-Thumri Award.</p>
+                <div class="ach-card-bar"><div class="ach-card-fill" style="width:70%"></div></div>
+            </div>
+            <div class="Achievement-card">
+                <div class="ach-card-icon">🏛️</div>
+                <div class="ach-card-num">12<span>+</span></div>
+                <h3>Reputed Festivals</h3>
+                <p>Featured at celebrated music events including Hari Vallabh Samaroh, Tansen Sangeet Samaroh and Ramanavami Music Festival, Mysuru.</p>
+                <div class="ach-card-bar"><div class="ach-card-fill" style="width:75%"></div></div>
+            </div>
+            <div class="Achievement-card">
+                <div class="ach-card-icon">📚</div>
+                <div class="ach-card-num">M.A.</div>
+                <h3>Music Education</h3>
+                <p>M.A. in Music from Karnataka University, Dharwad. Guest Faculty at Karnataka Arts College — sharing classical knowledge with the next generation.</p>
+                <div class="ach-card-bar"><div class="ach-card-fill" style="width:100%"></div></div>
+            </div>
+        </div>
+        <br>
+        <button onclick="learnmore()">View Full Journey →</button>
+    </section>
+
+    <!-- ===================== UPCOMING EVENTS ===================== -->
+    <section class="Events-section" id="Events-section">
+        <h1 class="Events-title">UPCOMING EVENTS</h1>
+
+        <div class="Events-container">
+            <!-- EVENT 1 -->
+            <div class="Event-card">
+                <h2>Madhur Swar</h2>
+                <div class="Event-info">
+                    <p>📍 Location: Dharwad</p>
+                    <p>⏰ Time: 6:00 PM</p>
+                </div>
+                <button class="calendar-btn" onclick="bookEvent('Madhur Swar')">GET TICKET</button>
+            </div>
+
+            <!-- EVENT 2 -->
+            <div class="Event-card">
+                <h2>Saptak Utsav</h2>
+                <div class="Event-info">
+                    <p>📍 Location: Hubli</p>
+                    <p>⏰ Time: 7:00 PM</p>
+                </div>
+                <button class="calendar-btn" onclick="bookEvent('Saptak Utsav')">GET TICKET</button>
+            </div>
+
+            <!-- EVENT 3 -->
+            <div class="Event-card">
+                <h2>Taal Tarang</h2>
+                <div class="Event-info">
+                    <p>📍 Location: Bengaluru</p>
+                    <p>⏰ Time: 6:30 PM</p>
+                </div>
+                <button class="calendar-btn" onclick="bookEvent('Taal Tarang')">GET TICKET</button>
+            </div>
+
+            <!-- EVENT 4 -->
+            <div class="Event-card">
+                <h2>Swar Dhara</h2>
+                <div class="Event-info">
+                    <p>📍 Location: Mysuru</p>
+                    <p>⏰ Time: 8:00 PM</p>
+                </div>
+                <button class="calendar-btn" onclick="bookEvent('Swar Dhara')">GET TICKET</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENT BOOKING POPUP FORM -->
+    <div id="eventForm" class="event-form">
+        <div class="event-content">
+            <span onclick="closeForm()" class="close">×</span>
+            <h2>Event Booking</h2>
+            <form onsubmit="confirmBooking(event)">
+                <label>Event Name</label>
+                <input type="text" id="eventName" readonly>
+
+                <label>Your Name</label>
+                <input type="text" id="userName" placeholder="Enter your name" required>
+
+                <label>Email</label>
+                <input type="email" id="userEmail" placeholder="Enter your email" required>
+
+                <label>Number of Seats</label>
+                <input type="number" id="seats" placeholder="Enter number of seats" min="1" max="10" value="1" required>
+
+                <button type="submit">Submit &amp; Open Email</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================== ARTIST JOURNEY & TIMELINE ===================== -->
+    <section class="journey-section" id="journey">
+        <section class="section-padding">
+            <div class="section-header">
+                <span class="section-eyebrow">The Evolution</span>
+                <h2 class="section-title">The Artist's Journey</h2>
+                <p class="section-subtitle">A timeline reflecting disciplined vocal training, landmark awards, and unforgettable stage triumphs.</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-item left">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2019 — Early Beginnings</div>
+                        <h4 class="timeline-title">Musical Training &amp; Roots</h4>
+                        <p class="timeline-desc">Embarked on disciplined classical and devotional vocal training, mastering traditional ragas and vocal stamina.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2021 — Stage Debut</div>
+                        <h4 class="timeline-title">First Stage Performances</h4>
+                        <p class="timeline-desc">First live stage performances at regional youth fests, captivating audiences with expressive vocal tonality.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2023 — Competition Honors</div>
+                        <h4 class="timeline-title">Best Singer &amp; First Prize</h4>
+                        <p class="timeline-desc">Earned the Best Singer Award and First Prize in competitive classical singing, solidifying artistic recognition.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2025 – 2026 — Live Concerts</div>
+                        <h4 class="timeline-title">Auditorium &amp; Cultural Tours</h4>
+                        <p class="timeline-desc">Headline vocal performances across university auditoriums, cultural festivals, and studio recordings.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- ===================== BOOKING ===================== -->
+    <section class="booking-section" id="booking-section">
+
+        <div class="booking-heading">
+            <h2 id="Booking">Artist Booking</h2>
+            <p>Book the artist for your special events.</p>
+        </div>
+
+        <!-- LEFT FORM - ARTIST BOOKING -->
+        <div class="booking-box">
+            <h2>Book Sujata Gurav</h2>
+            <p>Complete the enquiry form below. We will contact you for further details.</p>
+
+            <!-- BOOKING CALENDAR -->
+            <div class="booking-calendar-wrapper">
+                <h3>📅 Select Event Date</h3>
+                <div class="cal-nav">
+                    <button type="button" onclick="calPrev()">‹ Prev</button>
+                    <span class="cal-month-label" id="calMonthLabel"></span>
+                    <button type="button" onclick="calNext()">Next ›</button>
+                </div>
+                <div class="cal-grid" id="calGrid"></div>
+
+                <div class="cal-time-slots" id="calTimeSlots" style="display:none;">
+                    <h4>Select a Time Slot</h4>
+                    <div class="time-slots-grid" id="timeSlotsGrid"></div>
+                </div>
+
+                <div class="cal-selected-info" id="calSelectedInfo"></div>
+            </div>
+
+            <form id="bookingForm" onsubmit="submitBookingForm(event)" novalidate>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="bkName" placeholder="Your name">
+                        <div class="form-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label>Your Email *</label>
+                        <input type="email" id="bkEmail" placeholder="Your email">
+                        <div class="form-error"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Contact Phone *</label>
+                        <input type="tel" id="bkPhone" placeholder="+91">
+                        <div class="form-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label>Event Type *</label>
+                        <select id="bkEventType">
+                            <option>Live Concert</option>
+                            <option>Wedding</option>
+                            <option>College Event</option>
+                            <option>Private Event</option>
+                            <option>Cultural Festival</option>
+                            <option>Corporate Event</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Event Date *</label>
+                        <input type="date" id="bkEventDate">
+                        <div class="form-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label>Event Time</label>
+                        <input type="text" id="bkEventTime" placeholder="e.g. 6:00 PM" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Event Location / City *</label>
+                        <input type="text" id="bkCity" placeholder="Enter city">
+                        <div class="form-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label>Expected Audience Size</label>
+                        <input type="number" id="bkAudience" placeholder="e.g. 500">
+                    </div>
+                </div>
+
+                <div class="input-group full">
+                    <label>Event Details &amp; Specific Song Request</label>
+                    <textarea id="bkDetails" placeholder="Tell us about your event, song requests, special requirements..."></textarea>
+                </div>
+
+                <button type="submit">📧 Send Booking Request</button>
+                <div class="form-success" id="bookingSuccess"></div>
+            </form>
+        </div>
+
+        <!-- RIGHT FORM - LEAVE A MESSAGE -->
+        <div class="message-box">
+            <h2>Leave a Message</h2>
+            <p>Send a special word of encouragement or appreciation directly to the artist.</p>
+
+            <form id="messageForm" onsubmit="submitMessageForm(event)" novalidate>
+                <label>Your Name *</label>
+                <input type="text" id="msgName" placeholder="Your name">
+                <div class="form-error"></div>
+
+                <label>Your Email *</label>
+                <input type="email" id="msgEmail" placeholder="Your email">
+                <div class="form-error"></div>
+
+                <label>Your Message *</label>
+                <textarea id="msgText" placeholder="Write your message here..."></textarea>
+                <div class="form-error"></div>
+
+                <button type="submit">✉️ Send Message</button>
+                <div class="form-success" id="messageSuccess"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="contact-section" id="contact">
+
+        <!-- Decorative background orbs -->
+        <div class="contact-orb contact-orb-1"></div>
+        <div class="contact-orb contact-orb-2"></div>
+
+        <div class="contact-inner">
+
+            <!-- Header -->
+            <div class="contact-heading">
+                <p class="small-title">GET IN TOUCH</p>
+                <h2>CONTACT INFORMATION</h2>
+                <p class="description">
+                    Reach out for performance bookings, concert invitations and press enquiries.
+                </p>
+            </div>
+
+            <!-- Main contact panel -->
+            <div class="contact-panel">
+
+                <!-- Left: Artist card -->
+                <div class="contact-artist-card">
+                    <div class="contact-artist-img-wrap">
+                        <img src="/static/logo.jpeg" alt="Sujata Gurav" class="contact-artist-img">
+                        <div class="contact-artist-ring"></div>
+                        <div class="contact-available-badge">● Available for Bookings</div>
+                    </div>
+                    <h3 class="contact-artist-name">Vidushi Sujata Gurav</h3>
+                    <p class="contact-artist-role">Hindustani Classical Vocalist<br><span>Kirana Gharana</span></p>
+                    <div class="contact-social-row">
+                        <a href="https://youtube.com/@sujatagurav1" target="_blank" rel="noopener" class="contact-social-btn yt">▶</a>
+                        <a href="https://www.instagram.com/sujata_gurav_kammar" target="_blank" rel="noopener" class="contact-social-btn ig">📷</a>
+                        <a href="https://www.facebook.com/share/18PR69473y/" target="_blank" rel="noopener" class="contact-social-btn fb">ⓕ</a>
+                    </div>
+                </div>
+
+                <!-- Right: Contact cards -->
+                <div class="contact-details-col">
+                    <h2 class="contact-office-title">SUJATA GURAV OFFICIAL OFFICE</h2>
+                    <p class="office-description">Available for live performances across India and worldwide.</p>
+
+                    <div class="contact-cards">
+                        <div class="contact-box" onclick="window.location.href='mailto:sujataguravkammar@gmail.com'" style="cursor:pointer;">
+                            <div class="contact-box-left">
+                                <div class="icon">✉️</div>
+                            </div>
+                            <div class="contact-box-right">
+                                <p class="label">DIRECT EMAIL</p>
+                                <p class="value">sujataguravkammar@gmail.com</p>
+                                <span class="contact-action-hint">Click to email →</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-box" onclick="window.location.href='tel:+919060887575'" style="cursor:pointer;">
+                            <div class="contact-box-left">
+                                <div class="icon">📞</div>
+                            </div>
+                            <div class="contact-box-right">
+                                <p class="label">BOOKING LINE</p>
+                                <p class="value">+91 9060887575</p>
+                                <span class="contact-action-hint">Click to call →</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-box">
+                            <div class="contact-box-left">
+                                <div class="icon">📍</div>
+                            </div>
+                            <div class="contact-box-right">
+                                <p class="label">LOCATION</p>
+                                <p class="value">Dharwad, Karnataka</p>
+                                <span class="contact-action-hint">India</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick booking CTA -->
+                    <div class="contact-cta-row">
+                        <button onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'})" class="contact-cta-btn">
+                            📅 Book Now
+                        </button>
+                        <button onclick="window.location.href='mailto:sujataguravkammar@gmail.com?subject=Enquiry'" class="contact-cta-btn contact-cta-outline">
+                            ✉️ Send Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <!-- Floating notes (decorative) -->
+        <span class="footer-note-float">♫</span>
+        <span class="footer-note-float">🎵</span>
+        <span class="footer-note-float">♪</span>
+        <span class="footer-note-float">🎤</span>
+
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>🎙️ Sujata Vocalist</h3>
+                <p class="footer-tagline">Music • Passion • Emotion</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#Home">Home</a>
+                <a href="#About">About</a>
+                <a href="#My-Albums-section">Albums</a>
+                <a href="#Gallery">Gallery</a>
+                <a href="#Achievements">Achievements</a>
+                <a href="#Events-section">Events</a>
+                <a href="#Booking">Booking</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://youtube.com/@sujatagurav1" target="_blank" rel="noopener" title="YouTube">▶</a>
+                <a href="https://www.instagram.com/sujata_gurav_kammar" target="_blank" rel="noopener" title="Instagram">📷</a>
+                <a href="https://www.facebook.com/share/18PR69473y/" target="_blank" rel="noopener" title="Facebook">ⓕ</a>
+                <a href="mailto:sujataguravkammar@gmail.com" title="Email">✉</a>
+                <a href="tel:+919060887575" title="Phone">📞</a>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <p class="footer-copy">
+                    &copy; 2026 Sujata Vocalist. All Rights Reserved.
+                    &nbsp;|&nbsp;
+                    Hindustani Classical Vocalist, Kirana Gharana
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="topBtn" onclick="topFunction()" style="display:none;">↑ Top</button>
+
+    <!-- ===================== AI CHATBOT ===================== -->
+    <button id="chatbotToggle" onclick="toggleChatbot()" title="Chat with Sujata's AI Assistant">
+        🎵
+        <span class="chat-pulse"></span>
+    </button>
+
+    <div id="chatbotWindow">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">🎙️</div>
+                <div>
+                    <span class="chat-title">Sujata's Assistant</span>
+                    <span class="chat-status">● Online</span>
+                </div>
+            </div>
+            <button class="chat-close" onclick="toggleChatbot()">×</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="chat-suggestions" id="chatSuggestions"></div>
+
+        <div class="chat-input-row">
+            <input type="text" id="chatInput" placeholder="Ask me anything..." onkeydown="handleChatKeydown(event)">
+            <button id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+        </div>
+    </div>
+
+    <!-- Load main scripts last -->
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
